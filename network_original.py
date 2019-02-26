@@ -31,7 +31,7 @@ class Network:
             nodes_dict[node_id] = node
         # creation of hidden nodes with default activation function
         for node_id in genotype.hidden_nodes:
-            node = Node(activation='sigmoid')
+            node = Node(activation='sigmoid_custom')
             self.nodes.append(node)
             nodes_dict[node_id] = node
 
@@ -113,7 +113,8 @@ class Node:
         self.predecessors = []
 
         activations = {'ReLU': self.activation_ReLU,
-                       'sigmoid_custom': self.activation_sigmoid_custom}
+                       'sigmoid_custom': self.activation_sigmoid_custom,
+                       'sigmoid': self.activation_sigmoid}
         self.activation = activations[activation] if activation in activations else None
 
     def activation_ReLU(self):
@@ -122,9 +123,15 @@ class Node:
         """
         self.value = max(0, self.value)
 
-    def activation_sigmoid_custom(self):
+    def activation_sigmoid(self):
         """
         Executes sigmoid function on node's value
+        """
+        self.value = 1 / (1 + np.e ** (-self.value))
+
+    def activation_sigmoid_custom(self):
+        """
+        Executes custom sigmoid (from paper) function on node's value
         """
         self.value = 1 / (1 + np.e ** (-4.9 * self.value))
 
