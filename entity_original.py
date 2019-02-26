@@ -54,13 +54,12 @@ class Entity:
 
         # genes replacement
         for mg in matched_genes:
-            if genotype1.genes[mg].active or genotype2.genes[mg].active:
-                if not genotype1.genes[mg].active or not genotype2.genes[mg]:
-                    rand = random.random()
-                    if rand < .75:
-                        child_gen.genes[mg].active = False
-                    else:
-                        child_gen.genes[mg].active = True
+            if not genotype1.genes[mg].active or not genotype2.genes[mg].active:
+                rand = random.random()
+                if rand < .75:
+                    child_gen.genes[mg].active = False
+                else:
+                    child_gen.genes[mg].active = True
 
             if child_gen.genes[mg].active:
                 rand = random.random()
