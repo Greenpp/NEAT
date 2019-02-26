@@ -53,7 +53,7 @@ class Gene:
         """
         Shifts weight by random value
         """
-        self.weight += (random.random() * 4 - 2)
+        self.weight += (random.random() - .5)
 
 
 class Genotype:
