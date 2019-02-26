@@ -28,7 +28,7 @@ input_size = len(data[0])
 output_size = len(output[0])
 
 i_type = 'points'
-o_type = 'raw'
+o_type = 'probability'
 
 x = NEAT(input_size, output_size)
 
@@ -44,6 +44,7 @@ while True:
         print('Best fitness: {}'.format(-x.species[0].get_best_fitness()))
         x.graph_best_network()
         x.graph_loss()
+        x.compute_best(data, i_type, o_type)
         x.info()
     if x.species[0].get_best_fitness() == 0:
         print('Finished on generation: {}'.format(generation))
@@ -55,6 +56,7 @@ while True:
         print('=\n' * 4)
         print('DONE on generation: {}'.format(generation))
         print('-\n' * 4)
+        x.compute_best(data, i_type, o_type)
         x.graph_best_network()
         x.graph_loss()
         break
