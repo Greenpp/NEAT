@@ -36,13 +36,11 @@ class NEAT:
 
         self.error_value = []
 
+        Gene.innovation = 0
+
         # initial population
         first_entity = Entity(input_num, output_num)
-        second_entity = Entity(input_num, output_num)
         self.insert_entity(first_entity)
-        self.insert_entity(second_entity)
-
-        Gene.innovation = 0
 
     def info(self):
         """
@@ -92,6 +90,26 @@ class NEAT:
 
         new_specie = Specie(entity)
         self.species.append(new_specie)
+
+    def compute_best(self, data, input_type='points', output_type='probability'):
+        """
+        Computes output for best network
+
+        :param data: list
+            List of input vectors
+        :param input_type: str, optional
+            Network input type
+        :param output_type: str, optional
+            Network output type
+        """
+        best_entity = self.species[0].entities[0]
+        network = best_entity.create_network()
+
+        output = network.compute(data, input_type, output_type)
+        print(20 * '=')
+        for x, y in zip(data, output):
+            print('{} => {}'.format(x, y))
+        print(20 * '=')
 
     def test_best(self, data, output, input_type='points', output_type='probability'):
         """
