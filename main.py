@@ -8,8 +8,6 @@ from neat_original import NEAT
 
 warnings.filterwarnings('ignore')
 
-# TODO interspecie mating
-
 data = [
     np.array([1, 0]),
     np.array([0, 1]),
