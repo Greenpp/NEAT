@@ -1,7 +1,9 @@
-Interspecie mating
+Interspecies mating
 
 Better network visualization
 
 Species visualization
 
 Reproduction optimization
+
+Include network size in fitness function (network minimization)
