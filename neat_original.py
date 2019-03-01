@@ -163,22 +163,18 @@ class NEAT:
         # pass best entity of every specie unchanged
         # mate species to recreate population
         for specie, offspring in zip(old_species, offsprings):
+            suggestion = None
             if offspring > 0:
                 offspring -= 1
-                self.species.append(specie.persist())
+                passed_specie = specie.persist()
+                self.species.append(passed_specie)
+                suggestion = passed_specie
             mate_probabilities = list(reversed([i + 1 for i in range(len(specie.entities))]))
             for i in range(offspring):
                 parent1, parent2 = random.choices(specie.entities, mate_probabilities, k=2)
 
                 child = parent1.mate(parent2)
-                self.insert_entity(child)
-
-        # adapt acceptance delta
-        # species = len(self.species)
-        # if species < self.population // 4:
-        #     self.specie_acceptance -= .1
-        # else:
-        #     self.specie_acceptance += .1
+                self.insert_entity(child, suggestion)
 
     def test(self, data, output, input_type='points', output_type='probability'):
         """

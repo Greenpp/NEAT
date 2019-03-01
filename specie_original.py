@@ -135,7 +135,8 @@ class Specie:
         specie_size = len(self.entities)
 
         for entity in self.entities:
-            entity.test(data, output, input_type, output_type)
+            if entity.fitness is None:
+                entity.test(data, output, input_type, output_type)
 
             self.shared_fitness += entity.fitness
 
