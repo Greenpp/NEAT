@@ -31,7 +31,7 @@ class Network:
             nodes_dict[node_id] = node
         # creation of hidden nodes with default activation function
         for node_id in genotype.hidden_nodes:
-            node = Node(activation='sigmoid')
+            node = Node(activation='sigmoid_custom')
             self.nodes.append(node)
             nodes_dict[node_id] = node
 

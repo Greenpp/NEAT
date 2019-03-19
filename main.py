@@ -4,7 +4,7 @@ import warnings
 
 import numpy as np
 
-from neat_original import NEAT
+from neat import NEAT
 
 warnings.filterwarnings('ignore')
 
@@ -42,22 +42,13 @@ while True:
         print('Best fitness: {}'.format(-x.species[0].get_best_fitness()))
         x.graph_best_network()
         x.graph_loss()
-        x.compute_best(data, i_type, o_type)
         x.info()
+        x.show_best(data)
     if x.species[0].get_best_fitness() == 0:
         print('Finished on generation: {}'.format(generation))
         x.graph_best_network()
         x.graph_loss()
         break
-    if x.test_best(data, output, i_type, o_type) and not done:
-        done = True
-        print('=\n' * 4)
-        print('DONE on generation: {}'.format(generation))
-        print('-\n' * 4)
-        x.compute_best(data, i_type, o_type)
-        x.graph_best_network()
-        x.graph_loss()
-        break
     x.next_generation()
-    x.test(data, output, i_type, o_type)
+    x.test(data, output, i_type)
     x.sort()
